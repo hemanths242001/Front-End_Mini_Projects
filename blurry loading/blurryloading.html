@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blurry Loading</title>
+    <link rel="stylesheet" href="blurryloading.css"/>
+</head>
+<body>
+    <main>
+        <section class="bg"></section>
+        <div class="loading-text">0%</div>
+    </main>
+
+    <script>
+        const loadText = document.querySelector(".loading-text");
+        const backGround = document.querySelector(".bg");
+
+        let load = 0;
+        let int = setInterval(blurring, 30);
+
+        function blurring() {
+            load++;
+
+            if(load == 100){
+                clearInterval(int);
+            }
+
+            loadText.innerText = `${load}%`;
+            loadText.style.opacity = scale(load, 0, 100, 1, 0);
+            backGround.style.filter =  `blur(${scale(load, 0, 100, 30, 0)}px)`;
+        }
+
+        // from stack-overflow reference - map a range of numbers to another range of numnbers
+        const scale = (num,inMin,inMax,outMin,outMax) => {
+            return (num - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+        }
+    </script>
+</body>
+</html>
