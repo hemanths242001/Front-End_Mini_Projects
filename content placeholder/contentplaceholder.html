@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>content Placeholder</title>
+    <link rel="stylesheet" href="./contentplaceholder.css"/>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header animated-bg" id="header">
+           &nbsp;
+        </div>
+        <div class="card-content">
+            <h3 class="card-title animated-bg animated-bg-text" id="title">&nbsp;</h3>
+            <p class="card-excerpt" id="card-excerpt">
+                &nbsp;
+                <span class="animated-bg animated-bg-text">&nbsp;</span>
+                <span class="animated-bg animated-bg-text">&nbsp;</span>
+                <span class="animated-bg animated-bg-text">&nbsp;</span>
+            </p>
+            <!-- &nbsp; is entity which is non breaking space -->
+            <div class="profile">
+                <div class="profile-img animated-bg" id="profile-img">
+                   &nbsp;
+                </div>
+                <div class="profile-info">
+                    <strong class="animated-bg animated-bg-text" id="name">&nbsp;</strong>
+                    <small class="animated-bg animated-bg-text" id="date">&nbsp;</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const header = document.getElementById("header");
+        const title = document.getElementById("title");
+        const excerpt = document.getElementById("card-excerpt");
+        const profile_img = document.getElementById("profile-img");
+        const name = document.getElementById("name");
+        const date = document.getElementById("date");
+
+        const animatedBgs = document.querySelectorAll(".animated-bg");
+        const animatedBgsText = document.querySelectorAll(".animated-bg-text");
+
+        setTimeout(getCardData, 3000); //laoding for 2.5s after that below code all executes and content are shown
+
+        function getCardData() {
+            header.innerHTML = '<img src="png-clipart-react-javascript-angularjs-ionic-github-text-logo-thumbnail.png" alt="card image">';
+            title.innerHTML = "React Developer";
+            excerpt.innerHTML = "React js is a great javascript Library for building user interfaces.";
+            profile_img.innerHTML = '<img src="IMG_20220802_193822.jpg" alt="profile pic"/>';
+            name.innerHTML = "Hemanth";
+            date.innerHTML = "Mar 16 2023";
+
+            animatedBgs.forEach(bg => {
+                bg.classList.remove("animated-bg");
+            });
+            animatedBgsText.forEach(bg => {
+                bg.classList.remove("animated-bg-text");
+            })
+        }
+    </script>
+</body>
+</html>
