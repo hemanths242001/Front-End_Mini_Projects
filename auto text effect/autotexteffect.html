@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto text effect</title>
+    <link rel="stylesheet" href="autotexteffect.css">
+</head>
+<body>
+    <h1 id="text">Starting...</h1>
+
+    <div>
+        <label for="speed">speed:</label>
+        <input type="number" name="speed" id="speed" value="1" min="1" max="5" step="1">
+    </div>
+
+    <script>
+        const textEl = document.getElementById("text");
+        const speedEl = document.getElementById("speed");
+        const text = "Hi I am Hemanth!";
+        let idx = 1;
+        let speed = 300 / speedEl.value;
+
+        writeText();
+        
+        function writeText() {
+            textEl.innerText = text.slice(0, idx);
+            idx++;
+            if(idx > text.length){
+                idx = 1;
+            }
+            setTimeout(writeText, speed);
+        }
+
+        speedEl.addEventListener("input", (e) => {
+            speed = 300 / e.target.value;
+        })
+    </script>
+</body>
+</html>
