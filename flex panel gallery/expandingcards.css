@@ -1,0 +1,57 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    display:flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.panel1{
+    background: url(./pexels-auto-records-10394784.jpg);
+}
+.panel2{
+    background: url(./pexels-lloyd-freeman-1429775.jpg);
+}
+.panel3{
+    background: url(./pexels-paul-volkmer-7390883.jpg);
+}
+.panel4{
+    background: url(./pexels-piccinng-3923522.jpg);
+}
+.panel5{
+    background: url(./pexels-yurii-hlei-1545743.jpg);
+}
+.container{
+    display: flex;
+    width: 90vw;
+}
+.panel{
+    flex: 0.5;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
+    cursor: pointer;
+    position: relative;
+    transition: all 700ms ease;
+    border-radius: 80px;
+    margin: 10px;
+}
+.panel h3{
+    color: white;
+    position: absolute;
+    left: 50px;
+    bottom: 20px;
+    opacity: 0;
+}
+.panel.active{
+    flex: 5;
+}
+.panel.active h3{
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s;
+    font-size: 50px;
+}
