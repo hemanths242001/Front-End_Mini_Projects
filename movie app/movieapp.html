@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <link rel="stylesheet" href="./movieapp.css">
+</head>
+<body>
+    <header>
+        <form id="form">
+            <h1>My Movies</h1>
+            <input type="text" class="search" id="search" placeholder="search...">
+        </form>
+    </header>
+    <main id="main"></main>
+
+    <script>
+        // storing api link in variables
+        const API_URL = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1";
+        const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
+        const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query="';
+
+        const form = document.getElementById("form");
+        const search = document.getElementById("search");
+
+        // get initial movies and fetching api
+        getMovies(API_URL);
+
+        async function getMovies(url){
+            const res = await fetch(url);
+            const data = await res.json();
+
+            showMovies(data.results);
+        }
+        // adding movie section cards part
+        function showMovies(movies) {
+            main.innerHTML = '';
+
+            movies.forEach((movie) => {
+                const { title, poster_path, vote_average, overview } = movie;  // de-structuring the object
+
+                const movieElement = document.createElement('div');
+                movieElement.classList.add('movie');
+
+                movieElement.innerHTML = `
+                    <img src="${IMG_PATH + poster_path}" alt="${title}">
+                    <div class="movie-info">
+                        <h3>${title}</h3>
+                        <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+                    </div>
+                    <div class="overview">
+                        <h3>Overview</h3>
+                        ${overview}
+                    </div>`;
+                main.appendChild(movieElement);
+            })
+        }
+        // rating color part
+        function getClassByRate(vote) {
+            if(vote >= 8){
+                return "green";
+            }
+            else if(vote >= 5){
+                return "orange";
+            }
+            else{
+                return "red";
+            }
+        }
+        // search part
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const searchTerm = search.value;
+
+            if(searchTerm && searchTerm !== ""){
+                getMovies(SEARCH_API + searchTerm);
+
+                search.value = "";
+            }
+            else{
+                window.location.reload();
+            }
+        })
+    </script>
+</body>
+</html>
