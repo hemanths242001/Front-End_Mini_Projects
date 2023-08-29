@@ -1,0 +1,85 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: cornflowerblue;
+    color: white;
+}
+.form-container{
+    background-color: rgba(0,0,0,0.4);
+    padding: 30px 60px;
+    border-radius: 5px;
+}
+.form-container h1{
+    text-align: center;
+    margin: 0 0 30px 0;
+}
+.form-container a{
+    text-decoration: none;
+    color: lightskyblue;
+}
+.form-content{
+    position: relative;
+    margin: 20px 0 40px;
+    max-width: 300px;
+}
+.form-content input{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 18px;
+    color: #fff;
+}
+.form-content input:focus,.form-content input:valid{
+    outline: 0;
+    border-bottom-color: lightblue;
+}
+.btn{
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 10px 0;
+    font-family: inherit;
+    border: none;
+    border-radius: 5px;
+}
+.btn:focus{
+    outline: 0;
+}
+.btn:active{
+    transform: scale(1.2);
+}
+.text{
+    margin: 20px 0 0 0;
+}
+
+/* changing the label position which comes inside field */
+.form-content label{
+    position: absolute;
+    top: 50%;
+    left: 0;
+}
+/* classes adding after dom manipulation */
+.form-content label span{
+    display: inline-block;
+    font-size: 18px;
+    min-width: 5px;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.form-content input:focus + label span,
+.form-content input:valid + label span{
+    color: lightblue;
+    transform: translateY(-32px);
+}
