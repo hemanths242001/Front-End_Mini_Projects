@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>double heart click</title>
+    <link rel="stylesheet" href="doubleheartclick.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+</head>
+<body>
+    <h3>Double click on the image to <i class="fas fa-heart"></i> it</h3>
+    <small>You liked it <span id="times">0</span> times</small>
+
+    <div class="pic"></div>
+
+    <script>
+        const pic = document.querySelector(".pic");
+        const times = document.querySelector("#times");
+
+        let clickTime = 0;
+        let TimesClicked = 0;
+
+        pic.addEventListener(("click"), (e) => {
+            if(clickTime === 0){
+                clickTime = new Date().getTime();
+            }
+            else{
+                if((new Date().getTime() - clickTime) < 800){
+                    createHeart(e);
+                    clickTime = 0;
+                }
+                else{
+                    clickTime = new Date().getTime();
+                }
+            }
+        });
+           
+            
+
+        const createHeart = (e) => {
+            const heart = document.createElement("i");
+            heart.classList.add("fas");
+            heart.classList.add("fa-heart");
+
+            const x = e.clientX;
+            const y = e.clientY;
+
+            const left = e.target.offsetLeft;
+            const top = e.target.offsetTop;
+
+            const xInside = x - left;
+            const yInside = y - top;
+
+            heart.style.top = `${yInside}px`;
+            heart.style.left = `${xInside}px`;
+
+            pic.appendChild(heart);
+
+            times.innerHTML = ++TimesClicked;
+
+            setTimeOut(() => {
+                heart.remove();
+            },1000);
+        }
+    </script>
+</body>
+</html>
