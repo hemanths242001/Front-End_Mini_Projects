@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background slider</title>
+    <link rel="stylesheet" href="./backgroundslider.css"/>
+
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous"
+    />
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slide active" style="background-image: url('./igor-sporynin-0bW45ZK9atw-unsplash.jpg');"></div>
+
+        <div class="slide" style="background-image: url('./lovro-pavlicic-S0Dti66BMXw-unsplash.jpg');"></div>
+
+        <div class="slide" style="background-image: url('./mauro-lima-J-NSu54q6CY-unsplash.jpg');"></div>
+
+        <div class="slide" style="background-image: url('./omid-armin-Yvihek3pQPk-unsplash.jpg');"></div>
+
+        <div class="slide" style="background-image: url('./valeriia-miller-vBHm_dc6bzE-unsplash.jpg');"></div>
+
+
+        <button class="arrow left-arrow" id="left">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <button class="arrow right-arrow" id="right">
+            <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <script>
+        const body = document.body;
+        const slides = document.querySelectorAll(".slide");
+        const leftBtn = document.getElementById("left");
+        const rightBtn = document.getElementById("right");
+
+        let activeSlide = 0;
+
+        rightBtn.addEventListener("click", () => {
+            activeSlide ++;
+
+            if(activeSlide > slides.length-1){
+                activeSlide = 0;
+            }
+
+            setBgBody();
+            setActiveSlide();
+        })
+        leftBtn.addEventListener("click", () => {
+            activeSlide --;
+
+            if(activeSlide < 0){
+                activeSlide = slides.length-1;
+            }
+
+            setBgBody();
+            setActiveSlide();
+        })
+
+        setBgBody();
+
+        function setBgBody() {
+            body.style.backgroundImage = slides[activeSlide].style.backgroundImage;
+        }
+
+        function setActiveSlide () {
+            slides.forEach(slide => slide.classList.remove("active"));
+
+            slides[activeSlide].classList.add("active");
+        }
+    </script>
+</body>
+</html>
