@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+    <link rel="stylesheet" href="draganddrop.css"/>
+</head>
+<body>
+    <div class="empty">
+        <div class="fill" draggable="true"></div>
+    </div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+
+    <script>
+        const fill = document.querySelector(".fill");
+        const empties = document.querySelectorAll(".empty");
+
+        fill.addEventListener("dragstart", dragStart);
+        fill.addEventListener("dragend", dragEnd);
+
+        for(const empty of empties){
+            empty.addEventListener("dragover", dragOver);
+            empty.addEventListener("dragenter", dragEnter);
+            empty.addEventListener("dragleave", dragLeave);
+            empty.addEventListener("drop", dragDrop);
+        }
+        // instead of (for of loop) we can also forEach method hence it is a nodelist.
+
+        function dragStart() {
+            this.className += " hold";
+            setTimeout(() => this.className = "invisible", 10)
+            // setTimeout with append invisible class is used when we drag out the pic with fill class ,the empty box becomes white bg.
+        }
+        function dragEnd() {
+            this.className = "fill";
+        }
+        function dragOver(e) {
+            e.preventDefault();
+            // e(or)event.preventDefault() is the method in event used to prevent the default behaviour of the event. eg: if we use it on submit button which will not actually submit the information.
+        }
+        function dragEnter(e) {
+            e.preventDefault();
+            this.className += " hovered";
+        }
+        function dragLeave() {
+            this.className = "empty"
+        }
+        function dragDrop() {
+            this.className = "empty";
+            this.appendChild(fill);
+        }
+        
+    </script>
+</body>
+</html>
