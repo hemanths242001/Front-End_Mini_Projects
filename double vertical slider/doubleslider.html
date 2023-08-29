@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double vertical slider</title>
+    <link rel="stylesheet" href="doubleslider.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+
+</head>
+<body>
+    <div class="slider-container">
+        <div class="left-slide">
+            <div class="background-container-1">
+                <h1>continental GT 650</h1>
+                <P>Cafe racer</P>
+            </div>
+            <div class="background-container-2">
+                <h1>pulsar NS 200</h1>
+                <P>Street Look</P>
+            </div>
+            <div class="background-container-3">
+                <h1>Ninja ZX1000r</h1>
+                <P>Fast Machine</P>
+            </div>
+            <div class="background-container-4">
+                <h1>CBR 650RR</h1>
+                <P>Sport King</P>
+            </div>
+        </div>
+        <div class="right-slide">
+            <div class="background-image-4"></div>
+            <div class="background-image-3"></div>
+            <div class="background-image-2"></div>
+            <div class="background-image-1"></div>
+        </div>
+        <!-- the below order is order for the slide show connection between content and image... -->
+        <!-- for (container-1 => image-4) , (container-2 => image-3) , (container-3 => image-2) , (container-4 => image-1) -->
+        <div class="action-buttons">
+            <button class="down-button">
+                <i class="fas fa-arrow-down"></i>
+            </button>
+            <button class="up-button">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const sliderContainer = document.querySelector(".slider-container");
+        const slidingRight = document.querySelector(".right-slide");
+        const slidingLeft = document.querySelector(".left-slide");
+        const upButton = document.querySelector(".up-button");
+        const downButton = document.querySelector(".down-button");
+
+        const slideLength = slidingRight.querySelectorAll("div").length;
+
+        let activeSlideIndex = 0;
+
+        slidingLeft.style.top = `-${(slideLength - 1) * 100}vh`; //moves to top to attach correct image to correct content.
+
+        upButton.addEventListener("click" , () => changeSlide("up"));
+        downButton.addEventListener("click" , () => changeSlide("down"));
+
+        const changeSlide = (direction) => {
+            const sliderHeight = sliderContainer.clientHeight;
+            if(direction === "up"){
+                activeSlideIndex++;
+                if(activeSlideIndex > slideLength - 1){
+                    activeSlideIndex = 0;
+                }
+            }
+            else if(direction === "down"){
+                activeSlideIndex--;
+                if(activeSlideIndex < 0){
+                    activeSlideIndex = slideLength - 1;
+                }
+            }
+
+            slidingRight.style.transform = `translateY(-${activeSlideIndex * sliderHeight}px)`;
+            slidingLeft.style.transform = `translateY(${activeSlideIndex * sliderHeight}px)`;
+        }
+    </script>
+</body>
+</html>
